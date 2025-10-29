@@ -2,274 +2,149 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SaveHub – Smart tools. Real savings.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SaveHub — Discover smarter ways to save and automate your life with exclusive tools and offers." />
+  <title>SaveHub | Smarter Savings & Automation Tools</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <style>
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: "Inter", sans-serif;
       margin: 0;
-      background-color: #0f172a;
-      color: #f8fafc;
-      line-height: 1.5;
+      padding: 0;
+      background: #f9fafb;
+      color: #333;
     }
     header {
-      background: radial-gradient(circle at 20% 20%, #1e293b 0%, #0f172a 60%);
-      padding: 2.5rem 1.5rem 3rem;
       text-align: center;
-      border-bottom: 1px solid rgba(148,163,184,0.15);
+      padding: 60px 20px 40px;
+      background: linear-gradient(135deg, #0d47a1, #1976d2);
+      color: white;
     }
-    .logo {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: #38bdf8;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      margin-bottom: 0.75rem;
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+      font-weight: 700;
     }
-    h1 {
-      font-size: clamp(1.8rem, 2vw, 2.2rem);
-      font-weight: 600;
-      color: #f8fafc;
-      margin: 0 0 0.75rem;
+    header p {
+      font-size: 1.2em;
+      margin-top: 10px;
+      opacity: 0.9;
     }
-    .subhead {
-      font-size: 1rem;
-      color: #94a3b8;
-      max-width: 600px;
-      margin: 0 auto;
+    section {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+      text-align: center;
     }
-
-    main {
-      padding: 2rem 1.5rem 4rem;
-      max-width: 1200px;
-      margin: 0 auto;
+    .cta-btn {
+      display: inline-block;
+      padding: 14px 28px;
+      margin: 15px;
+      font-size: 1.1em;
+      color: white;
+      background: #1677be;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.2s;
     }
-
-    .cards-section {
-      max-width: 1200px;
-      margin: 4rem auto 6rem auto;
-      padding: 0 1rem;
-      color: #fff;
+    .cta-btn:hover {
+      background: #125f97;
     }
-
-    .section-eyebrow {
-      font-size: 1rem;
-      font-weight: 600;
-      color: #9ca3af;
-      letter-spacing: .05em;
-      margin-bottom: 1rem;
-      text-transform: uppercase;
+    form {
+      margin-top: 30px;
     }
-
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
-      gap: 1.5rem;
+    input[type="email"] {
+      width: 80%;
+      max-width: 350px;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1em;
     }
-
-    .card {
-      background: linear-gradient(145deg,#2a3448 0%,#1f2738 100%);
-      border-radius: 0.75rem;
-      padding: 1.25rem 1.5rem;
-      border: 1px solid rgba(255,255,255,.08);
-      box-shadow:0 30px 80px rgba(0,0,0,.6);
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      min-height:220px;
+    button[type="submit"] {
+      background: #1677be;
+      color: white;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+      font-size: 1em;
     }
-
-    .badge {
-      display:inline-block;
-      font-size:.75rem;
-      font-weight:500;
-      border-radius:9999px;
-      padding:0.25rem 0.5rem;
-      margin-bottom:0.75rem;
-      color:#fff;
+    button[type="submit"]:hover {
+      background: #125f97;
     }
-    .badge.popular {
-      background:#1d4ed8;
-    }
-    .badge.new {
-      background:#0f766e;
-    }
-    .badge.save {
-      background:#6b21a8;
-    }
-
-    .card h3 {
-      color:#fff;
-      font-size:1rem;
-      font-weight:600;
-      margin:0 0 .5rem 0;
-      line-height:1.4;
-    }
-
-    .card p {
-      color:#cbd5e1;
-      font-size:.875rem;
-      line-height:1.5;
-      margin:0 0 1.25rem 0;
-    }
-
-    .card a.cta-btn {
-      display:inline-block;
-      color:#fff;
-      font-size:.875rem;
-      font-weight:500;
-      border-radius:.5rem;
-      padding:.6rem 1rem;
-      text-align:center;
-      text-decoration:none;
-    }
-    .cta-blue { background:#1d4ed8; }
-    .cta-green { background:#0f766e; }
-    .cta-purple { background:#6b21a8; }
-
-    /* signup block */
-    .signup-wrap {
-      background:radial-gradient(circle at 20% 20%,#1f2937 0%,#0f172a 60%);
-      padding:4rem 1rem 5rem 1rem;
-      border-top:1px solid rgba(255,255,255,.05);
-      border-bottom:1px solid rgba(255,255,255,.05);
-      color:#fff;
-    }
-    .signup-inner {
-      max-width:700px;
-      margin:0 auto;
-      text-align:center;
-    }
-    .signup-inner h2 {
-      color:#fff;
-      font-size:1.25rem;
-      font-weight:600;
-      margin:0 0 .75rem 0;
-    }
-    .signup-inner p {
-      color:#94a3b8;
-      font-size:.9rem;
-      line-height:1.5;
-      margin:0 0 1.5rem 0;
-    }
-
     footer {
-      border-top: 1px solid rgba(148,163,184,0.15);
-      color: #475569;
       text-align: center;
-      padding: 2rem 1.5rem 4rem;
-      font-size: 0.75rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    footer .foot-brand {
-      color: #cbd5e1;
-      font-weight: 500;
-    }
-    footer .disclaimer {
-      margin-top: 0.75rem;
-      color: #64748b;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.4;
+      padding: 30px;
+      font-size: 0.9em;
+      color: #666;
     }
   </style>
 </head>
+
 <body>
   <header>
-    <div class="logo">SAVEHUB</div>
-    <h1>Smart tools. Real savings.</h1>
-    <p class="subhead">
-      We find services and products that save you money or time.
-      No hype. Only things worth paying for.
-    </p>
+    <h1>Welcome to SaveHub</h1>
+    <p>Discover smarter ways to save and automate your life with exclusive tools and offers.</p>
   </header>
 
-  <main>
-    <!-- FEATURED PICKS -->
-    <section class="cards-section">
-      <div class="section-eyebrow">Featured Picks</div>
+  <section id="email-capture">
+    <h2>Join the SaveHub Community</h2>
+    <p>Get exclusive savings, early access to automation tools, and weekly insider updates.</p>
 
-      <div class="cards-grid">
+    <!-- ConvertKit Email Capture Form -->
+    <form
+      action="https://app.kit.com/forms/8705695/subscriptions"
+      method="post"
+      data-sv-form="8705695"
+      data-uid="d9be650252"
+      data-format="inline"
+      data-version="5"
+      style="margin:auto;"
+    >
+      <input
+        type="email"
+        name="email_address"
+        placeholder="Enter your email"
+        required
+      />
+      <input type="hidden" name="source" value="Homepage" />
+      <button type="submit">Subscribe & Unlock Access</button>
+    </form>
 
-        <!-- Card 1: SaveClub -->
-        <div class="card">
-          <div>
-            <div class="badge popular">Popular</div>
-            <h3>Save money on what you’re already buying</h3>
-            <p>
-              Access member-only discounts on travel, dining, shopping, tickets, and more.
-              People save hundreds per year on normal everyday spend — without cutting lifestyle.
-            </p>
-          </div>
-          <a
-            class="cta-btn cta-blue"
-            href="https://go.savehub.site/saveclub"
-          >Unlock savings</a>
-        </div>
+    <script src="https://f.convertkit.com/ckjs/ck.5.js"></script>
+  </section>
 
-        <!-- Card 2: GoHighLevel -->
-        <div class="card">
-          <div>
-            <div class="badge new">New</div>
-            <h3>Automate lead follow-up while you sleep</h3>
-            <p>
-              All-in-one marketing and automation platform for small businesses and agencies.
-              Capture leads, auto-text them, book calls, and keep chasing revenue without you
-              chasing people manually.
-            </p>
-          </div>
-          <a
-            class="cta-btn cta-green"
-            href="https://go.savehub.site/gohighlevel"
-          >Try the automation stack</a>
-        </div>
-
-        <!-- Card 3: Bill negotiation (future) -->
-        <div class="card">
-          <div>
-            <div class="badge save">Save Money</div>
-            <h3>Lower your internet or phone bill</h3>
-            <p>
-              Upload your bill. A negotiator fights the provider to get it lowered.
-              If they can’t save you money, you don’t pay.
-              Coming soon to SaveHub.
-            </p>
-          </div>
-          <a
-            class="cta-btn cta-purple"
-            href="#signup"
-          >Get early access</a>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- SIGNUP -->
-    <section id="signup" class="signup-wrap">
-      <div class="signup-inner">
-        <h2>Smart tools. Real savings.</h2>
-        <p>
-          Get 1–2 short picks a week: things that save you money or time. No spam.
-        </p>
-
-        <!-- ConvertKit embed -->
-        <div style="max-width:700px;margin:0 auto;text-align:center;">
-          <script src="https://f.convertkit.com/ckjs/ck.5.js"></script>
-          <form action="https://app.kit.com/forms/8705695/subscriptions" class="seva-form formkit-form" method="post" data-sv-form="8705695" data-uid="d9be650252" data-format="inline" data-version="5" data-options="{&quot;settings&quot;:{&quot;after_subscribe&quot;:{&quot;action&quot;:&quot;message&quot;,&quot;success_message&quot;:&quot;Success! Now check your email to confirm your subscription.&quot;,&quot;redirect_url&quot;:&quot;&quot;},&quot;analytics&quot;:{&quot;google&quot;:null,&quot;fathom&quot;:null,&quot;facebook&quot;:null,&quot;segment&quot;:null,&quot;pinterest&quot;:null,&quot;sparkloop&quot;:null,&quot;googletagmanager&quot;:null},&quot;modal&quot;:{&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15},&quot;powered_by&quot;:{&quot;show&quot;:true,&quot;url&quot;:&quot;https://kit.com/features/forms?utm_campaign=poweredby&amp;utm_content=form&amp;utm_medium=referral&amp;utm_source=dynamic&quot;},&quot;recaptcha&quot;:{&quot;enabled&quot;:false},&quot;return_visitor&quot;:{&quot;action&quot;:&quot;show&quot;,&quot;custom_content&quot;:&quot;&quot;},&quot;slide_in&quot;:{&quot;display_in&quot;:&quot;bottom_right&quot;,&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15},&quot;sticky_bar&quot;:{&quot;display_in&quot;:&quot;top&quot;,&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15}},&quot;version&quot;:&quot;5&quot;}" min-width="400 500 600 700 800"><div data-style="clean"><ul class="formkit-alert formkit-alert-error" data-element="errors" data-group="alert"></ul><div data-element="fields" data-stacked="false" class="seva-fields formkit-fields"><div class="formkit-field"><input class="formkit-input" name="email_address" aria-label="Email Address" placeholder="Email Address" required="" type="email" style="color: rgb(0, 0, 0); border-color: rgb(227, 227, 227); border-radius: 4px; font-weight: 400;"></div><button data-element="submit" class="formkit-submit formkit-submit" style="color: rgb(255, 255, 255); background-color: rgb(22, 119, 190); border-radius: 4px; font-weight: 400;"><div class="formkit-spinner"><div></div><div></div><div></div></div><span class="">Subscribe</span></button></div><div class="formkit-powered-by-convertkit-container"><a href="https://kit.com/features/forms?utm_campaign=poweredby&amp;utm_content=form&amp;utm_medium=referral&amp;utm_source=dynamic" data-element="powered-by" class="formkit-powered-by-convertkit" data-variant="dark" target="_blank" rel="nofollow">Built with Kit</a></div></div></form>
-        </div>
-        <!-- /ConvertKit -->
-      </div>
-    </section>
-  </main>
+  <section id="offers">
+    <h2>Start Saving Smarter</h2>
+    <p>Choose a program below to explore exclusive savings and automation tools.</p>
+    <a
+      href="https://go.savehub.site/saveclub"
+      class="cta-btn"
+      target="_blank"
+      rel="noopener noreferrer"
+      >Unlock Savings (SaveClub)</a
+    >
+    <a
+      href="https://go.savehub.site/gohighlevel"
+      class="cta-btn"
+      target="_blank"
+      rel="noopener noreferrer"
+      >Join the Automation Stack (GoHighLevel)</a
+    >
+    <a
+      href="#"
+      class="cta-btn"
+      style="opacity: 0.6; cursor: default;"
+      >Bill Negotiation Tool (Coming Soon)</a
+    >
+  </section>
 
   <footer>
-    <div class="foot-brand">SaveHub</div>
-    <div class="disclaimer">
-      Some recommendations include affiliate links. You will never be charged extra.
-      We only list tools we would stand behind ourselves.
-    </div>
+    © 2025 SaveHub. All rights reserved. | Built with ❤️ using Coolify + ConvertKit
   </footer>
 </body>
 </html>
