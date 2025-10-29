@@ -1,616 +1,466 @@
 <!DOCTYPE html>
-<html lang="en" style="background-color:#0a0f1c; color:#fff; font-family: system-ui,-apple-system,BlinkMacSystemFont,'Inter',sans-serif;">
+<html lang="en" style="background-color:#0f172a;color:#fff;">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>SaveHub – Smart tools. Real savings.</title>
-  <meta name="description" content="We find services and products that save you money or time. No hype. Only things worth paying for." />
   <style>
-    /* page layout + cards */
     body {
       margin: 0;
-      background-color: #0a0f1c;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", Roboto, "Helvetica Neue", sans-serif;
+      background-color: #0f172a;
       color: #fff;
-      font-family: system-ui,-apple-system,BlinkMacSystemFont,'Inter',sans-serif;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    header {
-      padding: 2rem 1rem 1rem 1rem;
-      text-align: center;
-    }
-
-    .brand {
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: .08em;
-      color: #60a5fa;
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
-    }
-
-    .headline {
-      font-size: clamp(1.5rem,1vw+1rem,2rem);
-      line-height: 1.25;
-      font-weight: 600;
-      color: #fff;
-      margin: 0 0 1rem 0;
-    }
-
-    .tagline {
-      color: #94a3b8;
-      font-size: .95rem;
       line-height: 1.5;
-      max-width: 640px;
-      margin: 0 auto;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
-    main {
-      padding: 1rem 1rem 4rem 1rem;
+    /* Page layout */
+    header {
+      text-align: center;
+      padding: 3rem 1rem 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    header h1 {
+      font-size: clamp(1.5rem, 1vw + 1rem, 2rem);
+      font-weight: 600;
+      color: #fff;
+      margin: 0 0 1rem;
+    }
+    header p {
+      font-size: 1rem;
+      font-weight: 400;
+      color: #cbd5e1;
+      margin: 0;
+    }
+
+    section.featured-wrap {
       max-width: 1200px;
+      padding: 2rem 1rem 4rem;
       margin: 0 auto;
     }
-
-    h2.section-label {
-      color:#94a3b8;
-      text-transform:uppercase;
-      font-size: .7rem;
-      font-weight:600;
-      letter-spacing:.08em;
-      margin:2rem 0 1rem 0;
+    .featured-heading {
+      color: #fff;
+      font-size: .875rem;
+      font-weight: 500;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
     }
 
-    .card-row {
+    /* Card row */
+    .cards-row {
       display: grid;
-      gap: 1.25rem;
-      grid-template-columns: minmax(0,1fr);
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
     }
-    @media(min-width:768px) {
-      .card-row {
-        grid-template-columns: repeat(3,minmax(0,1fr));
+    @media(min-width:768px){
+      .cards-row {
+        grid-template-columns: repeat(3,1fr);
       }
     }
 
     .card {
+      background: radial-gradient(circle at 20% 20%, rgba(59,130,246,0.12) 0%, rgba(15,23,42,0) 70%), rgba(30,41,59,1);
+      border: 1px solid rgba(148,163,184,0.15);
+      border-radius: .75rem;
+      padding: 1.5rem;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.8);
       position: relative;
-      background: radial-gradient(circle at 20% 20%, rgba(96,165,250,.07) 0%, rgba(0,0,0,0) 60%), #0f172a;
-      border-radius: 12px;
-      padding: 1.25rem 1.25rem 1rem;
-      box-shadow: 0 30px 120px rgba(0,0,0,.8);
-      border: 1px solid rgba(148,163,184,.08);
       display: flex;
       flex-direction: column;
       min-height: 250px;
     }
 
     .pill {
-      display:inline-block;
-      font-size: .7rem;
-      line-height:1;
-      font-weight:600;
+      display: inline-block;
+      font-size: .75rem;
+      font-weight: 500;
       border-radius: 999px;
-      padding: .4rem .5rem;
+      padding: .25rem .5rem;
+      line-height: 1.2;
       margin-bottom: .75rem;
     }
+    .pill.blue { background-color: rgba(37, 99, 235, .15); color:#60a5fa; }
+    .pill.green { background-color: rgba(16,185,129,.15); color:#6ee7b7; }
+    .pill.purple { background-color: rgba(168,85,247,.15); color:#d8b4fe; }
 
-    .pill.blue {
-      background: rgba(37,99,235,.15);
-      color:#60a5fa;
-      border: 1px solid rgba(96,165,250,.4);
-    }
-
-    .pill.green {
-      background: rgba(16,185,129,.15);
-      color:#6ee7b7;
-      border: 1px solid rgba(110,231,183,.4);
-    }
-
-    .pill.purple {
-      background: rgba(168,85,247,.15);
-      color:#c084fc;
-      border: 1px solid rgba(192,132,252,.4);
-    }
-
-    .card h3 {
-      font-size: .95rem;
-      font-weight:600;
-      color:#fff;
-      margin:0 0 .75rem 0;
-      line-height:1.4;
-    }
-
-    .card p {
-      color:#94a3b8;
-      font-size:.85rem;
-      line-height:1.5;
-      margin:0 0 1rem 0;
-      flex-grow:1;
-    }
-
-    .cta-btn {
-      display:inline-block;
-      text-align:center;
-      text-decoration:none;
-      border:0;
-      border-radius:8px;
-      font-size:.8rem;
-      font-weight:600;
-      line-height:1.2;
-      padding:.75rem .75rem;
-      cursor:pointer;
-      transition:opacity .15s;
-      width:100%;
-    }
-    .cta-btn.blue {
-      background: linear-gradient(90deg,#2563eb,#4f46e5);
-      color:#fff;
-    }
-    .cta-btn.teal {
-      background: radial-gradient(circle at 0% 0%, rgba(16,185,129,.4) 0%, rgba(16,185,129,0) 60%), #0f766e;
-      background-color:#0f766e;
-      color:#fff;
-    }
-    .cta-btn.purple {
-      background: linear-gradient(90deg,#6d28d9,#7c3aed);
-      color:#fff;
-    }
-    .cta-btn:hover {
-      opacity:.9;
-    }
-
-    /* divider */
-    .divider-wrap {
-      margin: 3rem auto;
-      max-width: 900px;
-      border-top: 1px solid rgba(148,163,184,.15);
-      padding-top: 2rem;
-      text-align:center;
-    }
-
-    .optin-headline {
-      color:#fff;
-      font-size:1rem;
-      font-weight:600;
-      margin:0 0 .75rem 0;
-    }
-    .optin-sub {
-      color:#94a3b8;
-      font-size:.85rem;
-      line-height:1.5;
-      max-width:560px;
-      margin:0 auto 1rem auto;
-    }
-
-    /* simple inline form (your existing one) */
-    .inline-form {
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap: .5rem;
-      font-size:.8rem;
-      color:#fff;
-    }
-    .inline-form input[type="email"] {
-      background:#1e293b;
-      border:1px solid #334155;
-      border-radius:6px;
-      padding:.4rem .5rem;
-      color:#fff;
-      font-size:.8rem;
-      min-width:220px;
-      text-align:center;
-    }
-    .inline-form button {
-      appearance:none;
-      background:#1e40af;
-      color:#fff;
-      border:0;
-      border-radius:4px;
-      font-size:.8rem;
-      font-weight:600;
-      padding:.4rem .75rem;
-      cursor:pointer;
-    }
-
-    footer {
-      margin:3rem auto 2rem auto;
-      max-width:900px;
-      text-align:center;
-      color:#475569;
-      font-size:.7rem;
-      line-height:1.5;
-    }
-
-    footer .brand-foot {
-      color:#fff;
-      font-weight:600;
-      font-size:.7rem;
-      margin-bottom:.5rem;
-    }
-
-    footer a {
-      color:#60a5fa;
-      text-decoration:none;
-      font-size:.7rem;
-    }
-    footer a:hover {
-      text-decoration:underline;
-    }
-
-    /* ---------- modal styling (overlay etc.) ---------- */
-    #interestModal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.6);
-      display: none; /* toggled by JS */
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-    }
-
-    #interestModalCard {
-      position: relative;
-      background: #0f172a;
-      color: #fff;
-      width: 90%;
-      max-width: 400px;
-      border-radius: 12px;
-      padding: 24px 24px 20px;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.8);
-      font-family: inherit;
-      border:1px solid rgba(148,163,184,.15);
-    }
-
-    #closeModalBtn {
-      background: transparent;
-      border: 0;
-      color: #94a3b8;
-      font-size: 14px;
-      line-height: 1;
-      padding: 4px 8px;
-      border-radius: 6px;
-      position: absolute;
-      right: 16px;
-      top: 16px;
-      cursor: pointer;
-    }
-
-    #modalTitle {
-      margin: 0 0 8px;
-      font-size: 1.1rem;
+    .card h2 {
+      margin: 0 0 .75rem;
+      font-size: 1rem;
       font-weight: 600;
       color: #fff;
     }
-
-    #modalDesc {
-      margin: 0 0 16px;
-      font-size: 0.9rem;
-      line-height: 1.4;
+    .card p {
+      margin: 0 0 1.25rem;
+      font-size: .875rem;
+      line-height: 1.5;
       color: #cbd5e1;
     }
 
-    #interestForm {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    #emailInput {
-      width: 100%;
-      background: #1e293b;
-      border: 1px solid #334155;
-      border-radius: 8px;
-      padding: 12px;
-      color: #fff;
-      font-size: 0.95rem;
-    }
-
-    #interestForm button[type="submit"] {
-      appearance: none;
-      border: 0;
-      border-radius: 8px;
-      background: linear-gradient(90deg,#2563eb,#4f46e5);
-      color: #fff;
-      font-size: 0.95rem;
-      font-weight: 600;
-      padding: 12px 16px;
+    .cta-btn {
+      display: inline-block;
+      text-align: center;
+      font-size: .875rem;
+      font-weight: 500;
+      line-height: 1.2;
+      border-radius: .5rem;
+      border: none;
       cursor: pointer;
-      transition: opacity 0.15s;
+      padding: .75rem 1rem;
+      width: 100%;
+      color: #fff;
     }
+    /* individual button themes */
+    .btn-savings { background-color: #2563eb; }
+    .btn-savings:hover { background-color:#1d4ed8; }
 
-    #interestForm button[type="submit"]:hover {
-      opacity:.9;
+    .btn-automation { background-color:#065f46; }
+    .btn-automation:hover { background-color:#064e3b; }
+
+    .btn-bill { background-color:#6b21a8; }
+    .btn-bill:hover { background-color:#581c87; }
+
+    /* footer block */
+    .footer-block {
+      max-width: 800px;
+      margin: 3rem auto 4rem;
+      text-align: center;
+      color:#fff;
     }
-
-    #formStatus {
-      font-size: 0.8rem;
-      line-height:1.4;
-      color:#94a3b8;
-      min-height:1em;
-      text-align:left;
+    .footer-block h3 {
+      margin:0 0 1rem;
+      font-size:1rem;
+      font-weight:600;
+      color:#fff;
     }
-
-    .modal-footnote {
-      margin:16px 0 0;
-      font-size:0.7rem;
-      line-height:1.4;
-      color:#475569;
+    .footer-block p {
+      color:#cbd5e1;
+      font-size:.875rem;
+      margin:0 auto 1.5rem;
+      max-width:500px;
+      line-height:1.5;
+    }
+    .footer-legal {
       text-align:center;
+      font-size:.7rem;
+      color:#64748b;
+      padding-bottom:4rem;
+      max-width:800px;
+      margin:0 auto;
+      line-height:1.4;
+    }
+    .footer-legal strong{
+      color:#94a3b8;
+      font-weight:500;
+    }
+
+    /* ---------- MODAL ---------- */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      display: none; /* shown via JS */
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 1rem;
+    }
+    .modal {
+      background-color:#1e2536;
+      border-radius:.75rem;
+      border:1px solid rgba(148,163,184,0.2);
+      max-width: 360px;
+      width:100%;
+      padding:1.5rem;
+      box-shadow:0 30px 80px rgba(0,0,0,0.8);
+      position:relative;
+      text-align:left;
+      color:#fff;
+    }
+    .modal h4 {
+      margin:0 0 .5rem;
+      font-size:1rem;
+      font-weight:600;
+      color:#fff;
+    }
+    .modal p {
+      margin:0 0 1rem;
+      font-size:.875rem;
+      line-height:1.4;
+      color:#cbd5e1;
+    }
+    .close-btn {
+      background:none;
+      border:none;
+      color:#94a3b8;
+      cursor:pointer;
+      font-size:1rem;
+      position:absolute;
+      top:.75rem;
+      right:.75rem;
+    }
+    .modal label{
+      display:block;
+      color:#fff;
+      font-size:.75rem;
+      margin-bottom:.5rem;
+      font-weight:500;
+    }
+    .modal input[type="email"]{
+      width:100%;
+      background-color:#0f172a;
+      border:1px solid rgba(148,163,184,.4);
+      border-radius:.5rem;
+      color:#fff;
+      font-size:.875rem;
+      padding:.75rem .75rem;
+      outline:none;
+    }
+    .modal input[type="email"]::placeholder{
+      color:#64748b;
+    }
+    .modal button.subscribe-submit{
+      margin-top:1rem;
+      width:100%;
+      background-color:#2563eb;
+      border:none;
+      color:#fff;
+      border-radius:.5rem;
+      font-size:.875rem;
+      font-weight:500;
+      line-height:1.2;
+      padding:.75rem 1rem;
+      cursor:pointer;
+    }
+    .modal button.subscribe-submit:hover{
+      background-color:#1d4ed8;
+    }
+    .confirm-msg {
+      font-size:.8rem;
+      color:#34d399;
+      margin-top:1rem;
+      display:none;
+    }
+    .error-msg {
+      font-size:.8rem;
+      color:#f87171;
+      margin-top:1rem;
+      display:none;
     }
   </style>
 </head>
 
 <body>
-
   <header>
-    <div class="brand">SAVEHUB</div>
-    <h1 class="headline">Smart tools. Real savings.</h1>
-    <p class="tagline">
-      We find services and products that save you money or time.
-      No hype. Only things worth paying for.
-    </p>
+    <h1>Smart tools. Real savings.</h1>
+    <p>We find services and products that save you money or time. No hype. Only things worth paying for.</p>
   </header>
 
-  <main>
+  <section class="featured-wrap">
+    <div class="featured-heading">Featured Picks</div>
 
-    <h2 class="section-label">Featured Picks</h2>
+    <div class="cards-row">
 
-    <section class="card-row">
-
-      <!-- CARD 1: Savings Club -->
-      <article class="card">
-        <span class="pill blue">Popular</span>
-        <h3>Save money on what you’re already buying</h3>
+      <!-- SAVINGS CARD -->
+      <div class="card">
+        <div class="pill blue">Popular</div>
+        <h2>Save money on what you’re already buying</h2>
         <p>
           Access member-only discounts on travel, dining, shopping, tickets, and more.
           People save hundreds per year on normal everyday spend — without cutting lifestyle.
         </p>
-        <a
-          id="btnSavings"
-          class="cta-btn blue"
-          href="https://go.savehub.site/saveclub"
-          >Unlock savings</a>
-      </article>
+        <button
+          class="cta-btn btn-savings"
+          data-tag="12078155"
+          data-redirect="https://YOUR_SAVINGS_PARTNER_LINK_HERE"
+        >
+          Unlock savings
+        </button>
+      </div>
 
-      <!-- CARD 2: Automation Stack -->
-      <article class="card">
-        <span class="pill green">New</span>
-        <h3>Automate lead follow-up while you sleep</h3>
+      <!-- AUTOMATION CARD -->
+      <div class="card">
+        <div class="pill green">New</div>
+        <h2>Automate lead follow-up while you sleep</h2>
         <p>
           All-in-one marketing and automation platform for small businesses and agencies.
-          Capture leads, auto-text them, book calls, and keep chasing revenue
-          without you chasing people manually.
+          Capture leads, auto-text them, book calls, and keep chasing revenue without you
+          chasing people manually.
         </p>
-        <a
-          id="btnAutomation"
-          class="cta-btn teal"
-          href="https://go.savehub.site/gohighlevel"
-          >Try the automation stack</a>
-      </article>
+        <button
+          class="cta-btn btn-automation"
+          data-tag="12078156"
+          data-redirect="https://YOUR_AUTOMATION_PARTNER_LINK_HERE"
+        >
+          Try the automation stack
+        </button>
+      </div>
 
-      <!-- CARD 3: Bill Negotiation -->
-      <article class="card">
-        <span class="pill purple">Save Money</span>
-        <h3>Lower your internet or phone bill</h3>
+      <!-- BILL NEGOTIATION CARD -->
+      <div class="card">
+        <div class="pill purple">Save Money</div>
+        <h2>Lower your internet or phone bill</h2>
         <p>
           Upload your bill. A negotiator fights the provider to get it lowered.
           If they can’t save you money, you don’t pay.
           Coming soon to SaveHub.
         </p>
-        <a
-          id="btnBills"
-          class="cta-btn purple"
-          href="#"
-          >Get early access</a>
-      </article>
-
-    </section>
-
-    <!-- divider block w/ newsletter style -->
-    <section class="divider-wrap">
-      <div class="optin-headline">Smart tools. Real savings.</div>
-      <div class="optin-sub">
-        Get 1–2 short picks a week: things that save you money or time. No spam.
+        <button
+          class="cta-btn btn-bill"
+          data-tag="12078158"
+          data-redirect=""  <!-- no redirect yet -->
+        >
+          Get early access
+        </button>
       </div>
 
-      <!-- Your existing inline form (can keep or remove later) -->
-      <form class="inline-form">
-        <label style="font-size:.7rem; color:#cbd5e1;">Email Address</label>
-        <input type="email" placeholder="you@example.com" />
-        <button type="submit">Subscribe</button>
-        <a href="https://kit.com" style="color:#60a5fa; font-size:.7rem;" target="_blank" rel="noopener noreferrer">Built with Kit</a>
-      </form>
-    </section>
+    </div>
+  </section>
 
-  </main>
+  <section class="footer-block">
+    <h3>Smart tools. Real savings.</h3>
+    <p>
+      Get 1–2 short picks a week: things that save you money or time. No spam.
+      Only stuff we’d honestly pay for.
+    </p>
+  </section>
 
-  <footer>
-    <div class="brand-foot">SaveHub</div>
-    <div style="max-width:640px; margin:0 auto 1rem auto;">
-      Some recommendations include affiliate links.
-      You will never be charged extra.
+  <div class="footer-legal">
+    <div><strong>SaveHub</strong></div>
+    <div style="margin-top:.5rem;">
+      Some recommendations include affiliate links. You will never be charged extra.
       We only list tools we would stand behind ourselves.
-    </div>
-    <div style="color:#475569; font-size:.7rem; line-height:1.5;">
-      &copy; <span id="yr"></span> SaveHub. All rights reserved.
-    </div>
-  </footer>
-
-
-  <!-- Interest capture modal (hidden by default) -->
-  <div id="interestModal">
-    <div id="interestModalCard">
-
-      <button id="closeModalBtn">✕</button>
-
-      <h2 id="modalTitle">Get access</h2>
-      <p id="modalDesc">
-        Drop your email and we’ll send your access link + insider-only savings.
-      </p>
-
-      <form id="interestForm">
-        <input
-          id="emailInput"
-          type="email"
-          required
-          placeholder="Email address"
-        />
-
-        <!-- hidden fields populated via JS -->
-        <input type="hidden" id="tagIdField" />
-        <input type="hidden" id="redirectUrlField" />
-
-        <button type="submit">Send me the link</button>
-
-        <div id="formStatus"></div>
-      </form>
-
-      <p class="modal-footnote">
-        No spam. We only send relevant deals or tools you asked about.
-      </p>
     </div>
   </div>
 
+  <!-- MODAL (hidden by default) -->
+  <div class="modal-overlay" id="emailModalOverlay">
+    <div class="modal" id="emailModal">
+      <button class="close-btn" id="modalCloseBtn" aria-label="Close">✕</button>
+      <h4>Where should we send it?</h4>
+      <p>
+        Drop your email and we’ll send you this pick — plus future savings you’ll actually care about.
+      </p>
+      <label for="leadEmail">Email</label>
+      <input type="email" id="leadEmail" placeholder="you@example.com" />
+      <button class="subscribe-submit" id="modalSubmitBtn">Send it to me</button>
 
-  <!-- Behavior -->
+      <div class="confirm-msg" id="confirmMsg">You're in ✔ We'll send it over.</div>
+      <div class="error-msg" id="errorMsg">Something went wrong. Please try again.</div>
+    </div>
+  </div>
+
+  <!-- ========= FRONTEND LOGIC ========= -->
   <script>
-  (function() {
-    // Update footer year
-    document.getElementById('yr').textContent = new Date().getFullYear();
+    // === CONFIG you'll edit ===
+    const FORM_ID = "8705695"; // from your URL
+    const SUBSCRIBE_ENDPOINT = "https://console.savehub.site/subscribe"; 
+    // You'll expose this endpoint from Coolify (see backend step below)
 
-    // TODO: fill these with YOUR ConvertKit tag IDs + final redirect URLs
-    const INTERESTS = {
-      savings: {
-        tagId: "TAG_ID_SAVINGS", // e.g. "1234567" from ConvertKit for interest_savings
-        title: "Unlock members-only savings",
-        desc: "We’ll send you your private access link and future member-only deals.",
-        redirect: "https://go.savehub.site/saveclub" // TODO confirm
-      },
-      automation: {
-        tagId: "TAG_ID_AUTOMATION", // e.g. "1234568" from ConvertKit for interest_automation
-        title: "Get the automation stack",
-        desc: "We’ll send you the automation platform link + tips to grow without chasing leads.",
-        redirect: "https://go.savehub.site/gohighlevel" // TODO confirm
-      },
-      bills: {
-        tagId: "TAG_ID_BILLS", // e.g. "1234569" from ConvertKit for interest_billnegotiation
-        title: "Get early access",
-        desc: "We’ll email you when we start lowering internet/phone bills — and how to join first.",
-        redirect: "" // if you don't have a live URL yet, we won't redirect
-      }
-    };
+    // Grab modal elements
+    const modalOverlay = document.getElementById("emailModalOverlay");
+    const modalCloseBtn = document.getElementById("modalCloseBtn");
+    const modalSubmitBtn = document.getElementById("modalSubmitBtn");
+    const leadEmailInput = document.getElementById("leadEmail");
+    const confirmMsg = document.getElementById("confirmMsg");
+    const errorMsg = document.getElementById("errorMsg");
 
-    const modal = document.getElementById("interestModal");
-    const modalCard = document.getElementById("interestModalCard");
-    const modalTitle = document.getElementById("modalTitle");
-    const modalDesc = document.getElementById("modalDesc");
-    const emailInput = document.getElementById("emailInput");
-    const tagIdField = document.getElementById("tagIdField");
-    const redirectUrlField = document.getElementById("redirectUrlField");
-    const form = document.getElementById("interestForm");
-    const formStatus = document.getElementById("formStatus");
-    const closeBtn = document.getElementById("closeModalBtn");
+    // We'll store these when user clicks a CTA
+    let currentTagId = null;
+    let currentRedirect = null;
 
-    function openModal(kind) {
-      const config = INTERESTS[kind];
-      if (!config) return;
-
-      modalTitle.textContent = config.title;
-      modalDesc.textContent = config.desc;
-      tagIdField.value = config.tagId;
-      redirectUrlField.value = config.redirect || "";
-      emailInput.value = "";
-      formStatus.textContent = "";
-      formStatus.style.color = "#94a3b8";
-
-      modal.style.display = "flex";
-      emailInput.focus();
+    // Open modal helper
+    function openModal(tagId, redirectUrl){
+      currentTagId = tagId;
+      currentRedirect = redirectUrl || "";
+      confirmMsg.style.display = "none";
+      errorMsg.style.display = "none";
+      leadEmailInput.value = "";
+      modalOverlay.style.display = "flex";
+      leadEmailInput.focus();
     }
 
-    function closeModal() {
-      modal.style.display = "none";
+    // Close modal helper
+    function closeModal(){
+      modalOverlay.style.display = "none";
     }
 
-    closeBtn.addEventListener("click", closeModal);
-
-    // click outside the card to close
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) {
+    modalCloseBtn.addEventListener("click", closeModal);
+    modalOverlay.addEventListener("click", (e) => {
+      // click outside modal closes
+      if(e.target === modalOverlay){
         closeModal();
       }
     });
 
-    // Hook up your CTA buttons (already in HTML with these IDs)
-    const btnSavings = document.getElementById("btnSavings");
-    const btnAutomation = document.getElementById("btnAutomation");
-    const btnBills = document.getElementById("btnBills");
-
-    if (btnSavings) {
-      btnSavings.addEventListener("click", function(e) {
-        e.preventDefault();
-        openModal("savings");
+    // Attach click handlers to each CTA button
+    document.querySelectorAll(".cta-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const tag = btn.getAttribute("data-tag");
+        const redirect = btn.getAttribute("data-redirect");
+        openModal(tag, redirect);
       });
-    }
+    });
 
-    if (btnAutomation) {
-      btnAutomation.addEventListener("click", function(e) {
-        e.preventDefault();
-        openModal("automation");
-      });
-    }
-
-    if (btnBills) {
-      btnBills.addEventListener("click", function(e) {
-        e.preventDefault();
-        openModal("bills");
-      });
-    }
-
-    // Submit handler
-    form.addEventListener("submit", async function(e) {
-      e.preventDefault();
-      formStatus.style.color = "#94a3b8";
-      formStatus.textContent = "One sec...";
-
-      const email = emailInput.value.trim();
-      const tagId = tagIdField.value;
-      const redirectUrl = redirectUrlField.value;
-
-      if (!email) {
-        formStatus.style.color = "#f87171";
-        formStatus.textContent = "Please enter a valid email.";
+    // Handle submission from modal
+    modalSubmitBtn.addEventListener("click", async () => {
+      const email = leadEmailInput.value.trim();
+      if(!email){
+        errorMsg.textContent = "Please enter an email.";
+        errorMsg.style.display = "block";
+        confirmMsg.style.display = "none";
         return;
       }
 
-      // --- IMPORTANT ---
-      // Right now we are *not* directly calling ConvertKit here,
-      // because that would expose your private API key in the browser.
-      //
-      // Instead, we'll do TEMP behavior:
-      //   - close modal
-      //   - redirect (if we have a URL)
-      //   - or show "You're on the list" if we don't
+      try {
+        // POST to our backend endpoint (which will talk to Kit securely)
+        const resp = await fetch(SUBSCRIBE_ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type":"application/json" },
+          body: JSON.stringify({
+            email,
+            formId: FORM_ID,
+            tagId: currentTagId
+          })
+        });
 
-      closeModal();
+        if(!resp.ok){
+          throw new Error("Bad response from server");
+        }
 
-      if (redirectUrl) {
-        window.location.href = redirectUrl;
-      } else {
-        // fallback if there's no URL yet (like early access waitlist)
-        alert("You're on the early access list. We'll be in touch!");
+        const data = await resp.json();
+
+        if(data.success){
+          confirmMsg.style.display = "block";
+          errorMsg.style.display = "none";
+
+          // If we have a redirect URL (savings, automation),
+          // send them there after ~1s.
+          if(currentRedirect){
+            setTimeout(() => {
+              window.location.href = currentRedirect;
+            }, 900);
+          } else {
+            // If no redirect (bill negotiation waitlist),
+            // just close after a beat.
+            setTimeout(() => {
+              closeModal();
+            }, 1200);
+          }
+
+        } else {
+          throw new Error(data.message || "Unknown error");
+        }
+
+      } catch(err){
+        console.error(err);
+        errorMsg.textContent = "Something went wrong. Please try again.";
+        errorMsg.style.display = "block";
+        confirmMsg.style.display = "none";
       }
-
-      // LATER:
-      // We'll replace the above with a secure call to your
-      // serverless endpoint that does:
-      //   1. add subscriber to ConvertKit
-      //   2. apply tagId
-      //   3. return success
-      //
-      // Then we do the redirect after a successful response.
     });
-  })();
   </script>
-
 </body>
 </html>
