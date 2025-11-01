@@ -56,9 +56,7 @@
       gap: 1.5rem;
     }
     @media(min-width:768px){
-      .cards-row {
-        grid-template-columns: repeat(3,1fr);
-      }
+      .cards-row { grid-template-columns: repeat(3,1fr); }
     }
 
     .card {
@@ -86,18 +84,8 @@
     .pill.green { background-color: rgba(16,185,129,.15); color:#6ee7b7; }
     .pill.purple { background-color: rgba(168,85,247,.15); color:#d8b4fe; }
 
-    .card h2 {
-      margin: 0 0 .75rem;
-      font-size: 1rem;
-      font-weight: 600;
-      color: #fff;
-    }
-    .card p {
-      margin: 0 0 1.25rem;
-      font-size: .875rem;
-      line-height: 1.5;
-      color: #cbd5e1;
-    }
+    .card h2 { margin: 0 0 .75rem; font-size: 1rem; font-weight: 600; color: #fff; }
+    .card p  { margin: 0 0 1.25rem; font-size: .875rem; line-height: 1.5; color: #cbd5e1; }
 
     .cta-btn {
       display: inline-block;
@@ -112,36 +100,22 @@
       width: 100%;
       color: #fff;
     }
-    /* individual button themes */
-    .btn-savings { background-color: #2563eb; }
+    .btn-savings     { background-color: #2563eb; }
     .btn-savings:hover { background-color:#1d4ed8; }
-
-    .btn-automation { background-color:#065f46; }
+    .btn-automation    { background-color:#065f46; }
     .btn-automation:hover { background-color:#064e3b; }
+    .btn-bill          { background-color:#6b21a8; }
+    .btn-bill:hover    { background-color:#581c87; }
 
-    .btn-bill { background-color:#6b21a8; }
-    .btn-bill:hover { background-color:#581c87; }
-
-    /* footer block */
     .footer-block {
       max-width: 800px;
       margin: 3rem auto 4rem;
       text-align: center;
       color:#fff;
     }
-    .footer-block h3 {
-      margin:0 0 1rem;
-      font-size:1rem;
-      font-weight:600;
-      color:#fff;
-    }
-    .footer-block p {
-      color:#cbd5e1;
-      font-size:.875rem;
-      margin:0 auto 1.5rem;
-      max-width:500px;
-      line-height:1.5;
-    }
+    .footer-block h3 { margin:0 0 1rem; font-size:1rem; font-weight:600; color:#fff; }
+    .footer-block p  { color:#cbd5e1; font-size:.875rem; margin:0 auto 1.5rem; max-width:500px; line-height:1.5; }
+
     .footer-legal {
       text-align:center;
       font-size:.7rem;
@@ -151,104 +125,36 @@
       margin:0 auto;
       line-height:1.4;
     }
-    .footer-legal strong{
-      color:#94a3b8;
-      font-weight:500;
-    }
+    .footer-legal strong{ color:#94a3b8; font-weight:500; }
 
     /* ---------- MODAL ---------- */
     .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.6);
-      display: none; /* shown via JS */
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      padding: 1rem;
+      position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+      display: none; align-items: center; justify-content: center;
+      z-index: 9999; padding: 1rem;
     }
     .modal {
-      background-color:#1e2536;
-      border-radius:.75rem;
-      border:1px solid rgba(148,163,184,0.2);
-      max-width: 360px;
-      width:100%;
-      padding:1.5rem;
-      box-shadow:0 30px 80px rgba(0,0,0,0.8);
-      position:relative;
-      text-align:left;
-      color:#fff;
+      background-color:#1e2536; border-radius:.75rem; border:1px solid rgba(148,163,184,0.2);
+      max-width: 360px; width:100%; padding:1.5rem;
+      box-shadow:0 30px 80px rgba(0,0,0,0.8); position:relative; text-align:left; color:#fff;
     }
-    .modal h4 {
-      margin:0 0 .5rem;
-      font-size:1rem;
-      font-weight:600;
-      color:#fff;
-    }
-    .modal p {
-      margin:0 0 1rem;
-      font-size:.875rem;
-      line-height:1.4;
-      color:#cbd5e1;
-    }
-    .close-btn {
-      background:none;
-      border:none;
-      color:#94a3b8;
-      cursor:pointer;
-      font-size:1rem;
-      position:absolute;
-      top:.75rem;
-      right:.75rem;
-    }
-    .modal label{
-      display:block;
-      color:#fff;
-      font-size:.75rem;
-      margin-bottom:.5rem;
-      font-weight:500;
-    }
+    .modal h4 { margin:0 0 .5rem; font-size:1rem; font-weight:600; color:#fff; }
+    .modal p  { margin:0 0 1rem; font-size:.875rem; line-height:1.4; color:#cbd5e1; }
+    .close-btn { background:none; border:none; color:#94a3b8; cursor:pointer; font-size:1rem;
+      position:absolute; top:.75rem; right:.75rem; }
+    .modal label{ display:block; color:#fff; font-size:.75rem; margin-bottom:.5rem; font-weight:500; }
     .modal input[type="email"]{
-      width:100%;
-      background-color:#0f172a;
-      border:1px solid rgba(148,163,184,.4);
-      border-radius:.5rem;
-      color:#fff;
-      font-size:.875rem;
-      padding:.75rem .75rem;
-      outline:none;
+      width:100%; background-color:#0f172a; border:1px solid rgba(148,163,184,.4); border-radius:.5rem;
+      color:#fff; font-size:.875rem; padding:.75rem .75rem; outline:none;
     }
-    .modal input[type="email"]::placeholder{
-      color:#64748b;
-    }
+    .modal input[type="email"]::placeholder{ color:#64748b; }
     .modal button.subscribe-submit{
-      margin-top:1rem;
-      width:100%;
-      background-color:#2563eb;
-      border:none;
-      color:#fff;
-      border-radius:.5rem;
-      font-size:.875rem;
-      font-weight:500;
-      line-height:1.2;
-      padding:.75rem 1rem;
-      cursor:pointer;
+      margin-top:1rem; width:100%; background-color:#2563eb; border:none; color:#fff;
+      border-radius:.5rem; font-size:.875rem; font-weight:500; line-height:1.2; padding:.75rem 1rem; cursor:pointer;
     }
-    .modal button.subscribe-submit:hover{
-      background-color:#1d4ed8;
-    }
-    .confirm-msg {
-      font-size:.8rem;
-      color:#34d399;
-      margin-top:1rem;
-      display:none;
-    }
-    .error-msg {
-      font-size:.8rem;
-      color:#f87171;
-      margin-top:1rem;
-      display:none;
-    }
+    .modal button.subscribe-submit:hover{ background-color:#1d4ed8; }
+    .confirm-msg{ font-size:.8rem; color:#34d399; margin-top:1rem; display:none; }
+    .error-msg  { font-size:.8rem; color:#f87171; margin-top:1rem; display:none; }
   </style>
 </head>
 
@@ -262,7 +168,6 @@
     <div class="featured-heading">Featured Picks</div>
 
     <div class="cards-row">
-
       <!-- SAVINGS CARD -->
       <div class="card">
         <div class="pill blue">Popular</div>
@@ -273,8 +178,8 @@
         </p>
         <button
           class="cta-btn btn-savings"
-          data-tag="12078155"
-          data-redirect="https://YOUR_SAVINGS_PARTNER_LINK_HERE"
+          data-source="savings"
+          data-redirect="https://go.savehub.site/saveclub"
         >
           Unlock savings
         </button>
@@ -291,8 +196,8 @@
         </p>
         <button
           class="cta-btn btn-automation"
-          data-tag="12078156"
-          data-redirect="https://YOUR_AUTOMATION_PARTNER_LINK_HERE"
+          data-source="automation"
+          data-redirect="https://go.savehub.site/gohighlevel"
         >
           Try the automation stack
         </button>
@@ -309,13 +214,12 @@
         </p>
         <button
           class="cta-btn btn-bill"
-          data-tag="12078158"
-          data-redirect=""  <!-- no redirect yet -->
+          data-source="bills"
+          data-redirect=""
         >
           Get early access
         </button>
       </div>
-
     </div>
   </section>
 
@@ -335,14 +239,12 @@
     </div>
   </div>
 
-  <!-- MODAL (hidden by default) -->
+  <!-- MODAL -->
   <div class="modal-overlay" id="emailModalOverlay">
     <div class="modal" id="emailModal">
       <button class="close-btn" id="modalCloseBtn" aria-label="Close">✕</button>
       <h4>Where should we send it?</h4>
-      <p>
-        Drop your email and we’ll send you this pick — plus future savings you’ll actually care about.
-      </p>
+      <p>Drop your email and we’ll send you this pick — plus future savings you’ll actually care about.</p>
       <label for="leadEmail">Email</label>
       <input type="email" id="leadEmail" placeholder="you@example.com" />
       <button class="subscribe-submit" id="modalSubmitBtn">Send it to me</button>
@@ -354,60 +256,47 @@
 
   <!-- ========= FRONTEND LOGIC ========= -->
   <script>
-    // === CONFIG you'll edit ===
-    const FORM_ID = "8705695"; // from your URL
-    const SUBSCRIBE_ENDPOINT = "https://api.savehub.site/subscribe"; 
-    // You'll expose this endpoint from Coolify (see backend step below)
+    // Backend endpoint in Coolify
+    const SUBSCRIBE_ENDPOINT = "https://api.savehub.site/subscribe";
 
-    // Grab modal elements
-    const modalOverlay = document.getElementById("emailModalOverlay");
-    const modalCloseBtn = document.getElementById("modalCloseBtn");
+    // Elements
+    const modalOverlay   = document.getElementById("emailModalOverlay");
+    const modalCloseBtn  = document.getElementById("modalCloseBtn");
     const modalSubmitBtn = document.getElementById("modalSubmitBtn");
     const leadEmailInput = document.getElementById("leadEmail");
-    const confirmMsg = document.getElementById("confirmMsg");
-    const errorMsg = document.getElementById("errorMsg");
+    const confirmMsg     = document.getElementById("confirmMsg");
+    const errorMsg       = document.getElementById("errorMsg");
 
-    // We'll store these when user clicks a CTA
-    let currentTagId = null;
+    // Current selection
+    let currentSource   = null;  // 'savings' | 'automation' | 'bills'
     let currentRedirect = null;
 
-    // Open modal helper
-    function openModal(tagId, redirectUrl){
-      currentTagId = tagId;
+    function openModal(source, redirectUrl) {
+      currentSource   = source;
       currentRedirect = redirectUrl || "";
       confirmMsg.style.display = "none";
-      errorMsg.style.display = "none";
-      leadEmailInput.value = "";
+      errorMsg.style.display   = "none";
+      leadEmailInput.value     = "";
       modalOverlay.style.display = "flex";
       leadEmailInput.focus();
     }
 
-    // Close modal helper
-    function closeModal(){
-      modalOverlay.style.display = "none";
-    }
+    function closeModal() { modalOverlay.style.display = "none"; }
 
     modalCloseBtn.addEventListener("click", closeModal);
-    modalOverlay.addEventListener("click", (e) => {
-      // click outside modal closes
-      if(e.target === modalOverlay){
-        closeModal();
-      }
-    });
+    modalOverlay.addEventListener("click", (e) => { if (e.target === modalOverlay) closeModal(); });
 
-    // Attach click handlers to each CTA button
+    // Hook CTAs
     document.querySelectorAll(".cta-btn").forEach(btn => {
       btn.addEventListener("click", () => {
-        const tag = btn.getAttribute("data-tag");
-        const redirect = btn.getAttribute("data-redirect");
-        openModal(tag, redirect);
+        openModal(btn.getAttribute("data-source"), btn.getAttribute("data-redirect"));
       });
     });
 
-    // Handle submission from modal
+    // Submit handler -> posts { email, source } and treats { ok: true } as success
     modalSubmitBtn.addEventListener("click", async () => {
-      const email = leadEmailInput.value.trim();
-      if(!email){
+      const email = (leadEmailInput.value || "").trim();
+      if (!email) {
         errorMsg.textContent = "Please enter an email.";
         errorMsg.style.display = "block";
         confirmMsg.style.display = "none";
@@ -415,47 +304,33 @@
       }
 
       try {
-        // POST to our backend endpoint (which will talk to Kit securely)
-        const resp = await fetch(SUBSCRIBE_ENDPOINT, {
+        const res  = await fetch(SUBSCRIBE_ENDPOINT, {
           method: "POST",
-          headers: { "Content-Type":"application/json" },
-          body: JSON.stringify({
-            email,
-            formId: FORM_ID,
-            tagId: currentTagId
-          })
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, source: currentSource })
         });
 
-        if(!resp.ok){
-          throw new Error("Bad response from server");
-        }
+        const text = await res.text();
+        console.log("subscribe response:", res.status, text);
 
-        const data = await resp.json();
+        let data = {};
+        try { data = JSON.parse(text); } catch (_) {}
 
-        if(data.success){
+        // Accept success if ok:true or body contains "ok":true
+        if (res.ok && (data.ok === true || text.includes('"ok":true'))) {
           confirmMsg.style.display = "block";
-          errorMsg.style.display = "none";
+          errorMsg.style.display   = "none";
 
-          // If we have a redirect URL (savings, automation),
-          // send them there after ~1s.
-          if(currentRedirect){
-            setTimeout(() => {
-              window.location.href = currentRedirect;
-            }, 900);
+          if (currentRedirect) {
+            setTimeout(() => { window.location.href = currentRedirect; }, 900);
           } else {
-            // If no redirect (bill negotiation waitlist),
-            // just close after a beat.
-            setTimeout(() => {
-              closeModal();
-            }, 1200);
+            setTimeout(closeModal, 1200);
           }
-
         } else {
-          throw new Error(data.message || "Unknown error");
+          throw new Error(`API returned ${res.status}: ${text}`);
         }
-
-      } catch(err){
-        console.error(err);
+      } catch (err) {
+        console.error("subscribe failed:", err);
         errorMsg.textContent = "Something went wrong. Please try again.";
         errorMsg.style.display = "block";
         confirmMsg.style.display = "none";
