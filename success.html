@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color:#0f172a;color:#fff;">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Thanks – SaveHub</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", Roboto, "Helvetica Neue", sans-serif;
+      background-color:#0f172a;
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:100vh;
+      text-align:center;
+    }
+    .box {
+      max-width:420px;
+      padding:2rem 1.5rem;
+      border-radius:.75rem;
+      border:1px solid rgba(148,163,184,.3);
+      background:rgba(15,23,42,.9);
+      box-shadow:0 30px 80px rgba(0,0,0,.8);
+    }
+    h1 { font-size:1.4rem; margin:0 0 .75rem; }
+    p  { font-size:.9rem; color:#cbd5e1; margin:.25rem 0; }
+    .small { font-size:.8rem; color:#94a3b8; margin-top:1rem; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>Thanks, you’re in.</h1>
+    <p>We’ve saved your preferences and sent the details to your inbox.</p>
+    <p id="productText"></p>
+    <p class="small" id="redirectText"></p>
+  </div>
+
+  <script>
+    const params   = new URLSearchParams(window.location.search);
+    const product  = params.get("product") || "this pick";
+    const redirect = params.get("redirect") || "";
+
+    const productText  = document.getElementById("productText");
+    const redirectText = document.getElementById("redirectText");
+
+    if (product === "savings") {
+      productText.textContent = "Next up, you’ll see the SaveClub member discounts.";
+    } else if (product === "automation") {
+      productText.textContent = "Next up, you’ll see the automation stack offer.";
+    } else if (product === "bills") {
+      productText.textContent = "We’ll email you when bill negotiation is ready.";
+    } else {
+      productText.textContent = "You’ll see your pick in a moment.";
+    }
+
+    if (redirect) {
+      redirectText.textContent = "Taking you to the offer…";
+      const sep = redirect.includes("?") ? "&" : "?";
+      const utm = `utm_source=savehub&utm_medium=signup&utm_campaign=${encodeURIComponent(product || "general")}`;
+
+      setTimeout(() => {
+        window.location.href = redirect + sep + utm;
+      }, 1800);
+    } else {
+      redirectText.textContent = "You can close this tab when you’re ready.";
+    }
+  </script>
+</body>
+</html>
