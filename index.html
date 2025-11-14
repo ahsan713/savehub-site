@@ -80,9 +80,9 @@
       line-height: 1.2;
       margin-bottom: .75rem;
     }
-    .pill.blue { background-color: rgba(37, 99, 235, .15); color:#60a5fa; }
-    .pill.green { background-color: rgba(16,185,129,.15); color:#6ee7b7; }
-    .pill.purple { background-color: rgba(168,85,247,.15); color:#d8b4fe; }
+    .pill.blue   { background-color: rgba(37, 99, 235, .15);  color:#60a5fa; }
+    .pill.green  { background-color: rgba(16,185,129,.15);   color:#6ee7b7; }
+    .pill.purple { background-color: rgba(168,85,247,.15);   color:#d8b4fe; }
 
     .card h2 { margin: 0 0 .75rem; font-size: 1rem; font-weight: 600; color: #fff; }
     .card p  { margin: 0 0 1.25rem; font-size: .875rem; line-height: 1.5; color: #cbd5e1; }
@@ -100,12 +100,12 @@
       width: 100%;
       color: #fff;
     }
-    .btn-savings     { background-color: #2563eb; }
-    .btn-savings:hover { background-color:#1d4ed8; }
-    .btn-automation    { background-color:#065f46; }
+    .btn-savings        { background-color: #2563eb; }
+    .btn-savings:hover  { background-color:#1d4ed8; }
+    .btn-automation     { background-color:#065f46; }
     .btn-automation:hover { background-color:#064e3b; }
-    .btn-bill          { background-color:#6b21a8; }
-    .btn-bill:hover    { background-color:#581c87; }
+    .btn-bill           { background-color:#6b21a8; }
+    .btn-bill:hover     { background-color:#581c87; }
 
     .footer-block {
       max-width: 800px;
@@ -179,6 +179,7 @@
         <button
           class="cta-btn btn-savings"
           data-source="savings"
+          data-tag="savings_interest"
           data-redirect="https://go.savehub.site/saveclub"
         >
           Unlock savings
@@ -197,6 +198,7 @@
         <button
           class="cta-btn btn-automation"
           data-source="automation"
+          data-tag="automation_stack_interest"
           data-redirect="https://go.savehub.site/gohighlevel"
         >
           Try the automation stack
@@ -215,6 +217,7 @@
         <button
           class="cta-btn btn-bill"
           data-source="bills"
+          data-tag="bill_negotiation_interest"
           data-redirect=""
         >
           Get early access
@@ -270,10 +273,13 @@
     // Current selection
     let currentSource   = null;  // 'savings' | 'automation' | 'bills'
     let currentRedirect = null;
+    let currentTag      = null;  // matches Brevo INTEREST values
 
-    function openModal(source, redirectUrl) {
+    function openModal(source, redirectUrl, tag) {
       currentSource   = source;
       currentRedirect = redirectUrl || "";
+      currentTag      = tag || null;
+
       confirmMsg.style.display = "none";
       errorMsg.style.display   = "none";
       leadEmailInput.value     = "";
@@ -281,59 +287,83 @@
       leadEmailInput.focus();
     }
 
-    function closeModal() { modalOverlay.style.display = "none"; }
+    function closeModal() {
+      modalOverlay.style.display = "none";
+    }
 
     modalCloseBtn.addEventListener("click", closeModal);
-    modalOverlay.addEventListener("click", (e) => { if (e.target === modalOverlay) closeModal(); });
+    modalOverlay.addEventListener("click", (e) => {
+      if (e.target === modalOverlay) closeModal();
+    });
 
-    // Hook CTAs
-    document.querySelectorAll(".cta-btn").forEach(btn => {
+    // Hook CTAs – pull source, redirect, and tag from data-attributes
+    document.querySelectorAll(".cta-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
-        openModal(btn.getAttribute("data-source"), btn.getAttribute("data-redirect"));
+        const source   = btn.getAttribute("data-source");
+        const redirect = btn.getAttribute("data-redirect") || "";
+        const tag      = btn.getAttribute("data-tag") || null;
+        openModal(source, redirect, tag);
       });
     });
 
-    // Submit handler -> posts { email, source } and treats { ok: true } as success
+    function showError(msg) {
+      errorMsg.textContent    = msg;
+      errorMsg.style.display  = "block";
+      confirmMsg.style.display = "none";
+    }
+
+    function showSuccess(msg) {
+      confirmMsg.textContent   = msg;
+      confirmMsg.style.display = "block";
+      errorMsg.style.display   = "none";
+    }
+
+    // Submit handler -> posts { email, firstName, tag }
     modalSubmitBtn.addEventListener("click", async () => {
       const email = (leadEmailInput.value || "").trim();
+
       if (!email) {
-        errorMsg.textContent = "Please enter an email.";
-        errorMsg.style.display = "block";
-        confirmMsg.style.display = "none";
+        showError("Please enter an email.");
+        return;
+      }
+
+      if (!currentTag) {
+        console.error("No tag set for this signup");
+        showError("Something went wrong. Please refresh and try again.");
         return;
       }
 
       try {
-        const res  = await fetch(SUBSCRIBE_ENDPOINT, {
+        const resp = await fetch(SUBSCRIBE_ENDPOINT, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, source: currentSource })
+          body: JSON.stringify({
+            email,
+            firstName: "",     // optional for now
+            tag: currentTag
+          })
         });
 
-        const text = await res.text();
-        console.log("subscribe response:", res.status, text);
+        const data = await resp.json();
+        console.log("subscribe response:", resp.status, data);
 
-        let data = {};
-        try { data = JSON.parse(text); } catch (_) {}
+        if (!resp.ok || data.error) {
+          showError("Something went wrong. Please try again.");
+          return;
+        }
 
-        // Accept success if ok:true or body contains "ok":true
-        if (res.ok && (data.ok === true || text.includes('"ok":true'))) {
-          confirmMsg.style.display = "block";
-          errorMsg.style.display   = "none";
+        showSuccess("You're in ✔ We'll send it over.");
 
-          if (currentRedirect) {
-            setTimeout(() => { window.location.href = currentRedirect; }, 900);
-          } else {
-            setTimeout(closeModal, 1200);
-          }
+        if (currentRedirect) {
+          setTimeout(() => {
+            window.location.href = currentRedirect;
+          }, 900);
         } else {
-          throw new Error(`API returned ${res.status}: ${text}`);
+          setTimeout(closeModal, 1200);
         }
       } catch (err) {
         console.error("subscribe failed:", err);
-        errorMsg.textContent = "Something went wrong. Please try again.";
-        errorMsg.style.display = "block";
-        confirmMsg.style.display = "none";
+        showError("Something went wrong. Please try again.");
       }
     });
   </script>
