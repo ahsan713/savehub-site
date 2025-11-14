@@ -143,13 +143,14 @@
     .close-btn { background:none; border:none; color:#94a3b8; cursor:pointer; font-size:1rem;
       position:absolute; top:.75rem; right:.75rem; }
     .modal label{ display:block; color:#fff; font-size:.75rem; margin-bottom:.5rem; font-weight:500; }
+    .modal input[type="text"],
     .modal input[type="email"]{
       width:100%; background-color:#0f172a; border:1px solid rgba(148,163,184,.4); border-radius:.5rem;
-      color:#fff; font-size:.875rem; padding:.75rem .75rem; outline:none;
+      color:#fff; font-size:.875rem; padding:.75rem .75rem; outline:none; margin-bottom:.75rem;
     }
-    .modal input[type="email"]::placeholder{ color:#64748b; }
+    .modal input::placeholder{ color:#64748b; }
     .modal button.subscribe-submit{
-      margin-top:1rem; width:100%; background-color:#2563eb; border:none; color:#fff;
+      margin-top:.25rem; width:100%; background-color:#2563eb; border:none; color:#fff;
       border-radius:.5rem; font-size:.875rem; font-weight:500; line-height:1.2; padding:.75rem 1rem; cursor:pointer;
     }
     .modal button.subscribe-submit:hover{ background-color:#1d4ed8; }
@@ -248,8 +249,13 @@
       <button class="close-btn" id="modalCloseBtn" aria-label="Close">✕</button>
       <h4>Where should we send it?</h4>
       <p>Drop your email and we’ll send you this pick — plus future savings you’ll actually care about.</p>
+
+      <label for="leadFirstName">First name (optional)</label>
+      <input type="text" id="leadFirstName" placeholder="Ahsan" />
+
       <label for="leadEmail">Email</label>
       <input type="email" id="leadEmail" placeholder="you@example.com" />
+
       <button class="subscribe-submit" id="modalSubmitBtn">Send it to me</button>
 
       <div class="confirm-msg" id="confirmMsg">You're in ✔ We'll send it over.</div>
@@ -259,21 +265,19 @@
 
   <!-- ========= FRONTEND LOGIC ========= -->
   <script>
-    // Backend endpoint in Coolify
     const SUBSCRIBE_ENDPOINT = "https://api.savehub.site/subscribe";
 
-    // Elements
-    const modalOverlay   = document.getElementById("emailModalOverlay");
-    const modalCloseBtn  = document.getElementById("modalCloseBtn");
-    const modalSubmitBtn = document.getElementById("modalSubmitBtn");
-    const leadEmailInput = document.getElementById("leadEmail");
-    const confirmMsg     = document.getElementById("confirmMsg");
-    const errorMsg       = document.getElementById("errorMsg");
+    const modalOverlay    = document.getElementById("emailModalOverlay");
+    const modalCloseBtn   = document.getElementById("modalCloseBtn");
+    const modalSubmitBtn  = document.getElementById("modalSubmitBtn");
+    const leadEmailInput  = document.getElementById("leadEmail");
+    const leadFirstInput  = document.getElementById("leadFirstName");
+    const confirmMsg      = document.getElementById("confirmMsg");
+    const errorMsg        = document.getElementById("errorMsg");
 
-    // Current selection
     let currentSource   = null;  // 'savings' | 'automation' | 'bills'
     let currentRedirect = null;
-    let currentTag      = null;  // matches Brevo INTEREST values
+    let currentTag      = null;  // Brevo interest key
 
     function openModal(source, redirectUrl, tag) {
       currentSource   = source;
@@ -283,6 +287,8 @@
       confirmMsg.style.display = "none";
       errorMsg.style.display   = "none";
       leadEmailInput.value     = "";
+      leadFirstInput.value     = "";
+
       modalOverlay.style.display = "flex";
       leadEmailInput.focus();
     }
@@ -296,7 +302,7 @@
       if (e.target === modalOverlay) closeModal();
     });
 
-    // Hook CTAs – pull source, redirect, and tag from data-attributes
+    // Hook CTAs
     document.querySelectorAll(".cta-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
         const source   = btn.getAttribute("data-source");
@@ -307,8 +313,8 @@
     });
 
     function showError(msg) {
-      errorMsg.textContent    = msg;
-      errorMsg.style.display  = "block";
+      errorMsg.textContent     = msg;
+      errorMsg.style.display   = "block";
       confirmMsg.style.display = "none";
     }
 
@@ -318,9 +324,10 @@
       errorMsg.style.display   = "none";
     }
 
-    // Submit handler -> posts { email, firstName, tag }
+    // Submit handler -> posts { email, firstName, tag, source }
     modalSubmitBtn.addEventListener("click", async () => {
-      const email = (leadEmailInput.value || "").trim();
+      const email     = (leadEmailInput.value  || "").trim();
+      const firstName = (leadFirstInput.value  || "").trim();
 
       if (!email) {
         showError("Please enter an email.");
@@ -339,8 +346,9 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             email,
-            firstName: "",     // optional for now
-            tag: currentTag
+            firstName,
+            tag: currentTag,
+            source: currentSource
           })
         });
 
@@ -355,9 +363,10 @@
         showSuccess("You're in ✔ We'll send it over.");
 
         if (currentRedirect) {
-          setTimeout(() => {
-            window.location.href = currentRedirect;
-          }, 900);
+          // Go to success page which handles UTM + redirect
+          const url = `/success.html?product=${encodeURIComponent(currentSource || "")}&redirect=${encodeURIComponent(currentRedirect)}`;
+          // small delay so user sees the green message
+          setTimeout(() => { window.location.href = url; }, 800);
         } else {
           setTimeout(closeModal, 1200);
         }
